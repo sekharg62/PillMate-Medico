@@ -55,7 +55,7 @@ export default function Home() {
                                 <>
                                     <Link
                                         to="/dashboard"
-                                        className="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-md transition-colors"
+                                        className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-md transition-colors"
                                     >
                                         Dashboard
                                     </Link>
@@ -70,13 +70,13 @@ export default function Home() {
                                 <>
                                     <Link
                                         to="/login"
-                                        className="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-md transition-colors"
+                                        className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-md transition-colors"
                                     >
                                         Log In
                                     </Link>
                                     <Link
                                         to="/register"
-                                        className="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-medium rounded-full shadow-sm hover:shadow transition-all"
+                                        className="inline-flex min-h-10 items-center justify-center px-6 py-2.5 text-sm font-semibold leading-none text-white bg-emerald-500 hover:bg-emerald-600 rounded-full shadow-sm shadow-emerald-500/25 transition-all hover:shadow-md"
                                     >
                                         Get Started
                                     </Link>

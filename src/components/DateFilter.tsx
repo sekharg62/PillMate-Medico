@@ -112,7 +112,7 @@ export default function DateFilter() {
         </div>
         
         {/* Options */}
-        {options.map((opt, i) => {
+        {options.map((opt) => {
           const isActive = active === opt
           return (
             <button
