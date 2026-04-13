@@ -3,7 +3,8 @@ import { Input } from "@/components/ui/input";
 import { useAuth } from "@/context/AuthContext";
 import { useState } from "react";
 import { HOME_FAQ } from "@/data/homeFaq";
-import { siteConfig } from "@/siteConfig";
+import { homePageConfig } from "@/site-config/home";
+import { Check } from "lucide-react";
 
 export default function Home() {
     const { user, logout } = useAuth();
@@ -33,7 +34,7 @@ export default function Home() {
     return (
         <div className="min-h-screen bg-[#F8F9FF]">
             {/* Navigation */}
-            <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-100 transition-all duration-300">
+            <nav className="sticky top-0 z-50 bg-green-500/10 backdrop-blur-lg border-b border-green-400 transition-all duration-300">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-16">
                         {/* Logo */}
@@ -291,7 +292,7 @@ export default function Home() {
             <section className="bg-white border-y border-slate-100">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
                     <div className="grid grid-cols-2 md:grid-cols-4 text-center overflow-hidden rounded-l-2xl rounded-r-2xl border border-slate-100">
-                        {siteConfig.statsTrustBar.map((item) => {
+                        {homePageConfig.statsTrustBar.map((item) => {
                             const Icon = item.icon;
                             const theme = item.theme;
                             const bg =
@@ -408,7 +409,66 @@ export default function Home() {
                                     Real-time stock alerts and automated expiry tracking powered by predictive AI to prevent stockouts and eliminate wastage.
                                 </p>
                                 {/* Visual Mockup - Floating Cards */}
-                                <div className="mt-auto relative w-full h-32">
+                                <div className="mt-auto relative w-full h-40">
+                                    {/* Top detail to avoid blank space */}
+                                    <div className="absolute left-4 right-4 top-0 h-10 rounded-2xl bg-white/70 backdrop-blur border border-slate-100 shadow-sm flex items-center justify-between px-4">
+                                        <div className="flex items-center gap-2">
+                                            <span className="text-[11px] font-bold text-slate-600 uppercase tracking-wider">Inventory Monitor</span>
+                                            <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2 py-0.5 ring-1 ring-emerald-100">
+                                                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                                                <span className="text-[11px] font-semibold text-emerald-700">Live</span>
+                                            </span>
+                                        </div>
+                                        <div className="flex items-center gap-3 text-[11px] font-semibold text-slate-500">
+                                            <span className="inline-flex items-center gap-1.5">
+                                                <span className="h-2 w-2 rounded-full bg-emerald-400/70"></span>In stock
+                                            </span>
+                                            <span className="inline-flex items-center gap-1.5">
+                                                <span className="h-2 w-2 rounded-full bg-amber-400/70"></span>Expiring
+                                            </span>
+                                            <span className="inline-flex items-center gap-1.5">
+                                                <span className="h-2 w-2 rounded-full bg-red-400/70"></span>Low
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    {/* Soft wave highlight */}
+                                    <div className="absolute left-0 right-0 top-8 h-16 opacity-60">
+                                        <svg className="w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 20">
+                                            <path d="M0 12 C 12 6, 24 18, 36 10 S 60 2, 72 12 S 88 18, 100 8 L 100 20 L 0 20 Z" fill="rgba(16,185,129,0.08)" />
+                                            <path d="M0 14 C 14 8, 26 18, 38 12 S 62 4, 74 14 S 90 18, 100 10 L 100 20 L 0 20 Z" fill="rgba(14,165,233,0.06)" />
+                                        </svg>
+                                    </div>
+
+                                    {/* Subtle base panel */}
+                                    <div className="absolute inset-x-0 bottom-0 h-24 rounded-2xl bg-gradient-to-r from-emerald-50/80 via-white to-slate-50 border border-slate-100 shadow-sm" />
+
+                                    {/* KPI chips */}
+                                    <div className="absolute left-4 top-12 flex items-center gap-2">
+                                        <div className="inline-flex items-center gap-2 rounded-full bg-white/90 backdrop-blur px-3 py-1.5 border border-slate-100 shadow-sm">
+                                            <span className="h-2 w-2 rounded-full bg-emerald-500"></span>
+                                            <span className="text-xs font-semibold text-slate-700">Healthy Stock</span>
+                                            <span className="text-xs font-bold text-emerald-700">92%</span>
+                                        </div>
+                                        <div className="inline-flex items-center gap-2 rounded-full bg-white/80 backdrop-blur px-3 py-1.5 border border-slate-100 shadow-sm">
+                                            <span className="h-2 w-2 rounded-full bg-amber-500"></span>
+                                            <span className="text-xs font-semibold text-slate-700">Expiring</span>
+                                            <span className="text-xs font-bold text-amber-700">18</span>
+                                        </div>
+                                    </div>
+
+                                    {/* Mini stock bars */}
+                                    <div className="absolute left-6 bottom-5 flex items-end gap-1.5">
+                                        {[10, 18, 14, 22, 16, 26, 20].map((h, i) => (
+                                            <div
+                                                key={i}
+                                                className="w-2 rounded-t bg-gradient-to-t from-emerald-500/50 to-emerald-400/20 group-hover:from-emerald-600/70 transition-colors"
+                                                style={{ height: `${h}px` }}
+                                            />
+                                        ))}
+                                        <div className="ml-2 text-[11px] font-semibold text-slate-500">7d</div>
+                                    </div>
+
                                     <div className="absolute bottom-4 right-10 w-64 bg-white rounded-2xl p-4 shadow-xl border border-slate-100 group-hover:-translate-y-2 transition-transform duration-500 rotate-3 z-10">
                                         <div className="flex justify-between items-center mb-2"><span className="text-xs font-semibold text-slate-500 uppercase">Alert</span><span className="w-2 h-2 rounded-full bg-red-400 animate-pulse"></span></div>
                                         <p className="text-sm font-bold text-slate-800">Paracetamol 500mg Low</p>
@@ -417,6 +477,16 @@ export default function Home() {
                                     <div className="absolute -bottom-2 right-40 w-64 bg-white/80 backdrop-blur rounded-2xl p-4 shadow-lg border border-slate-100/50 group-hover:translate-x-4 transition-transform duration-700 -rotate-3 blur-[1px] group-hover:blur-none">
                                         <p className="text-sm font-bold text-slate-800">Auto-Reorder Triggered</p>
                                         <p className="text-xs text-emerald-600 mt-1">PO-9923 Sent to Supplier</p>
+                                    </div>
+                                    <div className="absolute bottom-10 left-10 w-56 bg-white/85 backdrop-blur rounded-2xl p-4 shadow-lg border border-slate-100/60 group-hover:translate-y-1 transition-transform duration-700 -rotate-2">
+                                        <div className="flex items-center justify-between mb-2">
+                                            <p className="text-xs font-semibold text-slate-500 uppercase">Forecast</p>
+                                            <span className="text-[11px] font-bold text-emerald-700">Next 14 days</span>
+                                        </div>
+                                        <div className="h-2 w-full rounded-full bg-slate-100 overflow-hidden">
+                                            <div className="h-full w-[72%] bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full"></div>
+                                        </div>
+                                        <p className="text-xs text-slate-600 mt-2">Reorder suggestion: <span className="font-semibold text-slate-800">+120 units</span></p>
                                     </div>
                                 </div>
                             </div>
@@ -449,10 +519,11 @@ export default function Home() {
                         </div>
 
                         {/* Feature 3: Standard Square */}
-                        <div className="relative col-span-1 border border-slate-200/60 bg-white rounded-[2rem] overflow-hidden group hover:shadow-lg transition-all duration-300">
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-amber-100 rounded-bl-full -z-0 opacity-50 group-hover:scale-110 transition-transform duration-500"></div>
+                        <div className="relative col-span-1 border border-slate-200/60 bg-white rounded-[2rem] overflow-hidden group hover:shadow-xl hover:shadow-amber-500/10 transition-all duration-300">
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-amber-100 rounded-bl-full z-0 opacity-50 group-hover:scale-110 transition-transform duration-500"></div>
+                            <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_20%_10%,rgba(251,191,36,0.12),transparent_55%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                             <div className="p-8 z-10 relative flex flex-col h-full">
-                                <div className="w-10 h-10 bg-amber-50 rounded-lg flex items-center justify-center mb-5 border border-amber-100">
+                                <div className="w-10 h-10 bg-amber-50 rounded-xl flex items-center justify-center mb-5 border border-amber-100 shadow-sm">
                                     <svg className="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                     </svg>
@@ -461,19 +532,45 @@ export default function Home() {
                                 <p className="text-slate-600 text-sm leading-relaxed">
                                     Secure, unified digital health records accessible to authorized personnel from any device.
                                 </p>
-                                <div className="mt-auto bg-slate-50 rounded-xl p-3 border border-slate-100">
-                                    <div className="h-2 w-1/3 bg-slate-200 rounded-full mb-2"></div>
-                                    <div className="h-2 w-full bg-slate-200 rounded-full mb-2"></div>
-                                    <div className="h-2 w-2/3 bg-slate-200 rounded-full"></div>
+                                <div className="mt-6 flex items-center justify-between rounded-xl bg-amber-50/60 border border-amber-100 px-3 py-2">
+                                    <div className="flex items-center gap-2">
+                                        <span className="h-2 w-2 rounded-full bg-amber-500"></span>
+                                        <span className="text-xs font-semibold text-amber-800">Encrypted</span>
+                                    </div>
+                                    <span className="text-xs font-bold text-slate-700">2.4M</span>
+                                </div>
+                                <div className="mt-auto bg-slate-50 rounded-2xl p-4 border border-slate-100 shadow-sm">
+                                    <div className="flex items-center justify-between mb-3">
+                                        <p className="text-xs font-bold text-slate-700">Recent Activity</p>
+                                        <span className="text-[11px] font-semibold text-slate-500">Today</span>
+                                    </div>
+                                    <div className="space-y-2">
+                                        <div className="flex items-center gap-2">
+                                            <span className="h-2 w-2 rounded-full bg-emerald-500/80"></span>
+                                            <div className="h-2 w-full bg-slate-200/80 rounded-full"></div>
+                                            <span className="text-[11px] font-semibold text-slate-500">14</span>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <span className="h-2 w-2 rounded-full bg-blue-500/70"></span>
+                                            <div className="h-2 w-4/5 bg-slate-200/80 rounded-full"></div>
+                                            <span className="text-[11px] font-semibold text-slate-500">9</span>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <span className="h-2 w-2 rounded-full bg-amber-500/70"></span>
+                                            <div className="h-2 w-2/3 bg-slate-200/80 rounded-full"></div>
+                                            <span className="text-[11px] font-semibold text-slate-500">6</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
                         {/* Feature 4: Standard Square */}
-                        <div className="relative col-span-1 border border-slate-200/60 bg-white rounded-[2rem] overflow-hidden group hover:shadow-lg transition-all duration-300">
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-100 rounded-bl-full -z-0 opacity-50 group-hover:scale-110 transition-transform duration-500"></div>
+                        <div className="relative col-span-1 border border-slate-200/60 bg-white rounded-[2rem] overflow-hidden group hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300">
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-100 rounded-bl-full z-0 opacity-50 group-hover:scale-110 transition-transform duration-500"></div>
+                            <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_80%_10%,rgba(59,130,246,0.14),transparent_60%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                             <div className="p-8 z-10 relative flex flex-col h-full">
-                                <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mb-5 border border-blue-100">
+                                <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center mb-5 border border-blue-100 shadow-sm">
                                     <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                                     </svg>
@@ -482,11 +579,27 @@ export default function Home() {
                                 <p className="text-slate-600 text-sm leading-relaxed">
                                     Streamlined procurement workflows and 1-click supplier restocking directly within the app.
                                 </p>
-                                <div className="mt-auto flex -space-x-2">
-                                    <div className="w-8 h-8 rounded-full bg-slate-200 border-2 border-white"></div>
-                                    <div className="w-8 h-8 rounded-full bg-slate-300 border-2 border-white"></div>
-                                    <div className="w-8 h-8 rounded-full bg-slate-400 border-2 border-white"></div>
-                                    <div className="w-8 h-8 rounded-full bg-blue-100 border-2 border-white flex items-center justify-center text-[10px] font-bold text-blue-600">+12</div>
+                                <div className="mt-6 flex items-center justify-between rounded-xl bg-blue-50/60 border border-blue-100 px-3 py-2">
+                                    <p className="text-xs font-semibold text-blue-800">Restock SLA</p>
+                                    <p className="text-xs font-bold text-slate-700">4–8 hrs</p>
+                                </div>
+                                <div className="mt-auto rounded-2xl bg-slate-50 border border-slate-100 p-4 shadow-sm">
+                                    <div className="flex items-center justify-between mb-3">
+                                        <p className="text-xs font-bold text-slate-700">Top Suppliers</p>
+                                        <span className="text-[11px] font-semibold text-slate-500">Verified</span>
+                                    </div>
+                                    <div className="flex items-center justify-between">
+                                        <div className="flex -space-x-2">
+                                            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-slate-200 to-slate-300 border-2 border-white"></div>
+                                            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-slate-200 to-slate-400 border-2 border-white"></div>
+                                            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-slate-300 to-slate-500 border-2 border-white"></div>
+                                            <div className="w-9 h-9 rounded-full bg-blue-100 border-2 border-white flex items-center justify-center text-[10px] font-bold text-blue-700">+12</div>
+                                        </div>
+                                        <div className="text-right">
+                                            <p className="text-xs font-bold text-slate-800">1-click PO</p>
+                                            <p className="text-[11px] font-semibold text-slate-500">Auto-match pricing</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -671,7 +784,7 @@ export default function Home() {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div className="bg-white rounded-[2rem] border border-slate-200/60 p-7 hover:shadow-lg hover:shadow-emerald-500/5 transition-all duration-300">
+                        <div className="bg-white hover:border-emerald-500 hover:bg-emerald-50 rounded-[2rem] border border-slate-200/60 p-7 hover:shadow-lg hover:shadow-emerald-500/5 transition-all duration-300">
                             <div className="w-12 h-12 rounded-2xl bg-emerald-100 flex items-center justify-center mb-5">
                                 <svg className="w-6 h-6 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7h18M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2M6 7v14a2 2 0 002 2h8a2 2 0 002-2V7" />
@@ -683,7 +796,7 @@ export default function Home() {
                             </p>
                         </div>
 
-                        <div className="bg-white rounded-[2rem] border border-slate-200/60 p-7 hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300">
+                        <div className="bg-white hover:border-violet-500 hover:bg-violet-50 rounded-[2rem] border border-slate-200/60 p-7 hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300">
                             <div className="w-12 h-12 rounded-2xl bg-violet-100 flex items-center justify-center mb-5">
                                 <svg className="w-6 h-6 text-violet-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253l7.5 4.5v7.494l-7.5 4.5-7.5-4.5v-7.494l7.5-4.5z" />
@@ -696,7 +809,7 @@ export default function Home() {
                             </p>
                         </div>
 
-                        <div className="bg-white rounded-[2rem] border border-slate-200/60 p-7 hover:shadow-lg hover:shadow-blue-500/5 transition-all duration-300">
+                        <div className="bg-white hover:border-blue-500 hover:bg-blue-50 rounded-[2rem] border border-slate-200/60 p-7 hover:shadow-lg hover:shadow-blue-500/5 transition-all duration-300">
                             <div className="w-12 h-12 rounded-2xl bg-blue-100 flex items-center justify-center mb-5">
                                 <svg className="w-6 h-6 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L2 12l7.75-5M14.25 17L22 12l-7.75-5" />
@@ -736,74 +849,36 @@ export default function Home() {
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-8">
-                        {/* Testimonial 1 */}
-                        <div className="bg-white rounded-2xl p-6 border border-gray-100">
-                            <div className="flex gap-1 mb-4">
-                                {[...Array(5)].map((_, i) => (
-                                    <svg key={i} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                    </svg>
-                                ))}
-                            </div>
-                            <p className="text-gray-700 mb-4">
-                                "Pillmate transformed our inventory management. We finally have an on-off switch for stock emergencies in real-time."
-                            </p>
-                            <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
-                                    <span className="text-emerald-600 font-semibold">DM</span>
+                        {homePageConfig.testimonials.map((t) => (
+                            <div key={t.key} className="bg-white rounded-2xl p-6 border border-gray-100">
+                                <div className="flex gap-1 mb-4">
+                                    {Array.from({ length: 5 }).map((_, i) => {
+                                        const rating = t.rating ?? 5;
+                                        const filled = i < rating;
+                                        return (
+                                        <svg
+                                            key={i}
+                                            className={`w-5 h-5 ${filled ? "text-yellow-400" : "text-gray-300"}`}
+                                            fill="currentColor"
+                                            viewBox="0 0 20 20"
+                                        >
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                        </svg>
+                                        );
+                                    })}
                                 </div>
-                                <div>
-                                    <p className="font-semibold text-gray-900">Dr. Maria Chen</p>
-                                    <p className="text-sm text-gray-600">Chief Pharmacist, Metro Health</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Testimonial 2 */}
-                        <div className="bg-white rounded-2xl p-6 border border-gray-100">
-                            <div className="flex gap-1 mb-4">
-                                {[...Array(5)].map((_, i) => (
-                                    <svg key={i} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                    </svg>
-                                ))}
-                            </div>
-                            <p className="text-gray-700 mb-4">
-                                "Our staff scheduling became twice as easy. This is our family now. No more sticky notes."
-                            </p>
-                            <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
-                                    <span className="text-emerald-600 font-semibold">JS</span>
-                                </div>
-                                <div>
-                                    <p className="font-semibold text-gray-900">James Sullivan</p>
-                                    <p className="text-sm text-gray-600">Clinic Manager, Reverie Care</p>
+                                <p className="text-gray-700 mb-4">{t.quote}</p>
+                                <div className="flex items-center gap-3">
+                                    <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
+                                        <span className="text-emerald-600 font-semibold">{t.initials}</span>
+                                    </div>
+                                    <div>
+                                        <p className="font-semibold text-gray-900">{t.name}</p>
+                                        <p className="text-sm text-gray-600">{t.title}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                        {/* Testimonial 3 */}
-                        <div className="bg-white rounded-2xl p-6 border border-gray-100">
-                            <div className="flex gap-1 mb-4">
-                                {[...Array(5)].map((_, i) => (
-                                    <svg key={i} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                    </svg>
-                                ))}
-                            </div>
-                            <p className="text-gray-700 mb-4">
-                                "Patient compliance was our top issue for years. With Pillmate, we've seen a 40% uptick across our network."
-                            </p>
-                            <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
-                                    <span className="text-emerald-600 font-semibold">AP</span>
-                                </div>
-                                <div>
-                                    <p className="font-semibold text-gray-900">Dr. Ava Patel</p>
-                                    <p className="text-sm text-gray-600">Director, West Medical Union</p>
-                                </div>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </section>
@@ -878,131 +953,89 @@ export default function Home() {
                             <svg className="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7H14a3.5 3.5 0 010 7H6" />
                             </svg>
-                            <span className="text-sm font-medium text-emerald-700">Flexible plans</span>
+                            <span className="text-sm font-medium text-emerald-700">{homePageConfig.pricing.badgeLabel}</span>
                         </div>
                         <h2 className="text-3xl sm:text-5xl font-bold text-slate-900 mb-4 tracking-tight">
-                            Pricing that fits your clinic
+                            {homePageConfig.pricing.title}
                         </h2>
                         <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                            Start with what you need, upgrade anytime, and stay confident with secure healthcare-grade tooling.
+                            {homePageConfig.pricing.subtitle}
                         </p>
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-6">
-                        <div className="group relative bg-white rounded-[2rem] border border-slate-200/60 p-8 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
-                            <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[radial-gradient(circle_at_top,rgba(16,185,129,0.14),transparent_55%)]" />
-                            <h3 className="text-xl font-bold text-slate-900 mb-2">Starter</h3>
-                            <p className="text-slate-600 mb-6">For new clinics getting organized.</p>
-                            <div className="flex items-end gap-2 mb-6">
-                                <span className="text-4xl font-extrabold text-slate-900">$0</span>
-                                <span className="text-sm text-slate-500 mb-1">/ month</span>
-                            </div>
-                            <ul className="space-y-3 text-slate-700">
-                                <li className="flex items-center gap-2">
-                                    <svg className="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                    </svg>
-                                    Core inventory + staff
-                                </li>
-                                <li className="flex items-center gap-2">
-                                    <svg className="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                    </svg>
-                                    Basic reports
-                                </li>
-                                <li className="flex items-center gap-2">
-                                    <svg className="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                    </svg>
-                                    Email support
-                                </li>
-                            </ul>
-                            <Link 
-                                to="/register"
-                                className="mt-8 flex justify-center items-center w-full border border-slate-200 text-slate-700 font-semibold px-6 py-3 rounded-xl hover:bg-slate-50 transition-colors"
-                            >
-                                Start Free
-                            </Link>
-                        </div>
+                        {homePageConfig.pricing.plans.map((plan) => {
+                            const isPopular = plan.variant === "popular";
+                            const cardClass = isPopular
+                                ? "group relative bg-gradient-to-b from-emerald-600 to-emerald-500 rounded-[2rem] p-8 text-white border border-emerald-500/60 shadow-xl shadow-emerald-500/10 hover:shadow-2xl hover:-translate-y-0.5 transition-all duration-300"
+                                : "group relative bg-white rounded-[2rem] border border-slate-200/60 p-8 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300";
 
-                        <div className="group relative bg-gradient-to-b from-emerald-600 to-emerald-500 rounded-[2rem] p-8 text-white border border-emerald-500/60 shadow-xl shadow-emerald-500/10 hover:shadow-2xl hover:-translate-y-0.5 transition-all duration-300">
-                            <div className="pointer-events-none absolute inset-0 opacity-100 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.18),transparent_55%)]" />
-                            <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 mb-5">
-                                <span className="w-2 h-2 rounded-full bg-white"></span>
-                                <span className="text-sm font-semibold">Most Popular</span>
-                            </div>
-                            <h3 className="text-xl font-bold mb-2">Growth</h3>
-                            <p className="text-white/90 mb-6">For clinics that need automation and insights.</p>
-                            <div className="flex items-end gap-2 mb-6">
-                                <span className="text-4xl font-extrabold">$3</span>
-                                <span className="text-sm text-white/80 mb-1">/ month</span>
-                            </div>
-                            <ul className="space-y-3 text-white/90">
-                                <li className="flex items-center gap-2">
-                                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                    </svg>
-                                    Smart stock + expiry tracking
-                                </li>
-                                <li className="flex items-center gap-2">
-                                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                    </svg>
-                                    Priority reports + exports
-                                </li>
-                                <li className="flex items-center gap-2">
-                                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                    </svg>
-                                    SMS + audit-ready logs
-                                </li>
-                            </ul>
-                            <Link 
-                                to={isLoggedIn ? "/dashboard" : "/register"}
-                                className="mt-8 flex justify-center items-center w-full bg-white text-emerald-700 font-bold px-6 py-3 rounded-xl border border-white/40 shadow-sm hover:shadow-md hover:bg-white/90 transition-all"
-                            >
-                                Get Growth
-                            </Link>
-                        </div>
+                            const glowClass = isPopular
+                                ? "pointer-events-none absolute inset-0 opacity-100 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.18),transparent_55%)]"
+                                : plan.key === "enterprise"
+                                    ? "pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.12),transparent_55%)]"
+                                    : "pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[radial-gradient(circle_at_top,rgba(16,185,129,0.14),transparent_55%)]";
 
-                        <div className="group relative bg-white rounded-[2rem] border border-slate-200/60 p-8 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
-                            <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.12),transparent_55%)]" />
-                            <h3 className="text-xl font-bold text-slate-900 mb-2">Enterprise</h3>
-                            <p className="text-slate-600 mb-6">Multi-store, compliance, and custom onboarding.</p>
-                            <div className="flex items-end gap-2 mb-6">
-                                <span className="text-4xl font-extrabold text-slate-900">Custom</span>
-                            </div>
-                            <ul className="space-y-3 text-slate-700">
-                                <li className="flex items-center gap-2">
-                                    <svg className="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                    </svg>
-                                    Zero-trust security + audit exports
-                                </li>
-                                <li className="flex items-center gap-2">
-                                    <svg className="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                    </svg>
-                                    Dedicated onboarding and SLAs
-                                </li>
-                                <li className="flex items-center gap-2">
-                                    <svg className="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                    </svg>
-                                    Advanced integrations
-                                </li>
-                            </ul>
-                            <a 
-                                href="#contact"
-                                className="mt-8 flex justify-center items-center w-full border border-slate-200 text-slate-700 font-semibold px-6 py-3 rounded-xl hover:bg-slate-50 transition-colors"
-                            >
-                                Contact Sales
-                            </a>
-                        </div>
+                            const featureTextClass = isPopular ? "text-white/90" : "text-slate-700";
+                            const descClass = isPopular ? "text-white/90" : "text-slate-600";
+                            const priceClass = isPopular ? "text-white" : "text-slate-900";
+                            const checkClass = isPopular ? "text-white" : "text-emerald-600";
+
+                            const ctaNode =
+                                plan.cta.kind === "link" ? (
+                                    <Link
+                                        to={plan.cta.to}
+                                        className="mt-8 flex justify-center items-center w-full border border-slate-200 text-slate-700 font-semibold px-6 py-3 rounded-xl hover:bg-slate-50 transition-colors"
+                                    >
+                                        {plan.cta.label}
+                                    </Link>
+                                ) : plan.cta.kind === "authLink" ? (
+                                    <Link
+                                        to={isLoggedIn ? plan.cta.toWhenLoggedIn : plan.cta.toWhenLoggedOut}
+                                        className="mt-8 flex justify-center items-center w-full bg-white text-emerald-700 font-bold px-6 py-3 rounded-xl border border-white/40 shadow-sm hover:shadow-md hover:bg-white/90 transition-all"
+                                    >
+                                        {plan.cta.label}
+                                    </Link>
+                                ) : (
+                                    <a
+                                        href={plan.cta.href}
+                                        className="mt-8 flex justify-center items-center w-full border border-slate-200 text-slate-700 font-semibold px-6 py-3 rounded-xl hover:bg-slate-50 transition-colors"
+                                    >
+                                        {plan.cta.label}
+                                    </a>
+                                );
+
+                            return (
+                                <div key={plan.key} className={cardClass}>
+                                    <div className={glowClass} />
+                                    {isPopular ? (
+                                        <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 mb-5">
+                                            <span className="w-2 h-2 rounded-full bg-white"></span>
+                                            <span className="text-sm font-semibold">{plan.popularLabel ?? "Most Popular"}</span>
+                                        </div>
+                                    ) : null}
+                                    <h3 className={`text-xl font-bold mb-2 ${isPopular ? "" : "text-slate-900"}`}>{plan.name}</h3>
+                                    <p className={`${descClass} mb-6`}>{plan.description}</p>
+                                    <div className="flex items-end gap-2 mb-6">
+                                        <span className={`text-4xl font-extrabold ${priceClass}`}>{plan.price}</span>
+                                        {plan.period ? <span className={`text-sm mb-1 ${isPopular ? "text-white/80" : "text-slate-500"}`}>{plan.period}</span> : null}
+                                    </div>
+                                    <ul className={`space-y-3 ${featureTextClass}`}>
+                                        {plan.features.map((feature) => (
+                                            <li key={feature} className="flex items-center gap-2">
+                                                <Check className={`w-4 h-4 ${checkClass}`} />
+                                                {feature}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    {ctaNode}
+                                </div>
+                            );
+                        })}
                     </div>
 
                     <div className="mt-10 text-center text-sm text-slate-600">
-                        Want a tailored demo? Use the form below and our team will reach out quickly.
+                        {homePageConfig.pricing.footerNote}
                     </div>
                 </div>
             </section>
