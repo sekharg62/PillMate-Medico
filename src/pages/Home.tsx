@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { useAuth } from "@/context/AuthContext";
 import { useState } from "react";
 import { HOME_FAQ } from "@/data/homeFaq";
+import { siteConfig } from "@/siteConfig";
 
 export default function Home() {
     const { user, logout } = useAuth();
@@ -287,31 +288,52 @@ export default function Home() {
             </section>
 
             {/* Stats Trust Bar */}
-            <section className="py-14 bg-white border-y border-slate-100">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                        <div className="group">
-                            <p className="text-4xl font-extrabold text-slate-900 mb-1 group-hover:text-emerald-600 transition-colors">500<span className="text-emerald-500">+</span></p>
-                            <p className="text-sm text-slate-500 font-medium">Clinics Worldwide</p>
-                        </div>
-                        <div className="group">
-                            <p className="text-4xl font-extrabold text-slate-900 mb-1 group-hover:text-violet-600 transition-colors">99.9<span className="text-violet-500">%</span></p>
-                            <p className="text-sm text-slate-500 font-medium">Platform Uptime</p>
-                        </div>
-                        <div className="group">
-                            <p className="text-4xl font-extrabold text-slate-900 mb-1 group-hover:text-teal-600 transition-colors">2M<span className="text-teal-500">+</span></p>
-                            <p className="text-sm text-slate-500 font-medium">Patient Records Managed</p>
-                        </div>
-                        <div className="group">
-                            <p className="text-4xl font-extrabold text-slate-900 mb-1 group-hover:text-amber-600 transition-colors">24<span className="text-amber-500">/7</span></p>
-                            <p className="text-sm text-slate-500 font-medium">Expert Support</p>
-                        </div>
+            <section className="bg-white border-y border-slate-100">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+                    <div className="grid grid-cols-2 md:grid-cols-4 text-center overflow-hidden rounded-l-2xl rounded-r-2xl border border-slate-100">
+                        {siteConfig.statsTrustBar.map((item) => {
+                            const Icon = item.icon;
+                            const theme = item.theme;
+                            const bg =
+                                theme === "emerald"
+                                    ? "bg-emerald-50 hover:bg-emerald-500"
+                                    : theme === "violet"
+                                        ? "bg-violet-50 hover:bg-violet-500"
+                                        : theme === "teal"
+                                            ? "bg-teal-50 hover:bg-teal-500"
+                                            : "bg-amber-50 hover:bg-amber-500";
+                            const accent =
+                                theme === "emerald"
+                                    ? "text-emerald-500"
+                                    : theme === "violet"
+                                        ? "text-violet-500"
+                                        : theme === "teal"
+                                            ? "text-teal-500"
+                                            : "text-amber-500";
+
+                            return (
+                                <div key={item.key} className={`group ${bg} py-12 transition-colors`}>
+                                    <div className="flex flex-col items-center gap-3 px-4">
+                                        <div className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-white/60 ring-1 ring-black/5 group-hover:bg-white/10 group-hover:ring-white/20 transition-colors">
+                                            <Icon className={`w-5 h-5 ${accent} group-hover:text-white`} />
+                                        </div>
+                                        <p className="text-4xl font-extrabold text-slate-900 leading-none group-hover:text-white transition-colors">
+                                            {item.value}
+                                            {item.valueSuffix ? (
+                                                <span className={`${accent} group-hover:text-white/90 transition-colors`}>{item.valueSuffix}</span>
+                                            ) : null}
+                                        </p>
+                                        <p className="text-sm text-slate-500 font-medium group-hover:text-white/90 transition-colors">{item.label}</p>
+                                    </div>
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
             </section>
 
             {/* Seamless Setup Section */}
-            <section id="how-it-works" className="py-20 bg-gradient-to-b from-white to-blue-50/50">
+            <section id="how-it-works" className=" py-14 bg-gradient-to-b from-white to-blue-50/50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
                         <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
