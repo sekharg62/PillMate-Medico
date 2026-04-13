@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/context/AuthContext";
 import { useState } from "react";
@@ -38,7 +37,7 @@ export default function Home() {
                     <div className="flex justify-between items-center h-16">
                         {/* Logo */}
                         <Link to="/" className="flex items-center gap-2">
-                            <img src="/BRAND-LOGO.svg" alt="Pillmate Logo" className="h-8 w-auto" />
+                            <img src="/BRANDLOGO.svg" alt="Pillmate Logo" className="h-8 w-auto" />
                             <span className="text-xl font-semibold text-gray-900">Pillmate</span>
                         </Link>
 
@@ -415,12 +414,12 @@ export default function Home() {
                                     Build faster invoices, instantly parse insurance claims, and control cash-equivalent accounting with unprecedented clarity.
                                 </p>
                                 {/* Visual Mockup - Abstract Chart */}
-                                <div className="mt-auto relative w-full h-[160px] shrink-0 flex items-end justify-between gap-2 px-2 pb-2">
+                                <div className="mt-auto relative w-full h-[450px] shrink-0 flex items-end justify-between gap-2 px-2 pb-2">
                                     {[40, 70, 45, 90, 65, 100, 85].map((height, i) => (
                                         <div key={i} className="w-1/6 bg-gradient-to-t from-violet-500 to-fuchsia-400 rounded-t-sm group-hover:from-emerald-400 group-hover:to-teal-300 transition-all duration-500 delay-75" style={{ height: `${height}%`, opacity: 0.5 + (i * 0.05) }}></div>
                                     ))}
                                     {/* Overlay line */}
-                                    <svg className="absolute inset-0 w-full h-full drop-shadow-md" preserveAspectRatio="none" viewBox="0 0 100 100">
+                                    <svg className="absolute inset-0 w-full h-full drop-shadow-md overflow-visible" preserveAspectRatio="none" viewBox="-2 -2 104 104">
                                         <path d="M0 60 Q 15 40, 30 55 T 60 20 T 100 35" fill="none" stroke="rgba(255,255,255,0.7)" strokeWidth="1.5" strokeLinecap="round" className="opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
                                     </svg>
                                 </div>
@@ -549,7 +548,7 @@ export default function Home() {
                             <div className="grid grid-cols-2 gap-4">
                                 {/* Pharmacist Card */}
                                 <div className="relative bg-emerald-400 rounded-3xl overflow-hidden shadow-xl col-span-2 lg:col-span-1 h-64 group">
-                                    <img src="https://images.unsplash.com/photo-1582750433449-648ed127c09e?auto=format&fit=crop&q=80&w=800" alt="Pharmacist" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                                    <img src="/feature-1.jpg" alt="Pharmacist" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                                     <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/90 via-emerald-900/20 to-transparent flex flex-col justify-end p-6">
                                         <p className="text-white font-bold text-xl mb-1">Expert Staff</p>
                                         <p className="text-emerald-200 text-sm">Empowered by technology</p>
@@ -1053,7 +1052,7 @@ export default function Home() {
                                             placeholder="Dr. Jane Smith"
                                             value={formData.fullName}
                                             onChange={handleInputChange}
-                                            className="w-full bg-slate-900/50 border-white/10 text-white placeholder-slate-400 focus:ring-emerald-500 focus:border-emerald-500 h-13 rounded-xl"
+                                            className="w-full p-4 bg-slate-900/50 border-white/10 text-white placeholder-slate-400 focus:ring-emerald-500 focus:border-emerald-500 h-13 rounded-xl"
                                             required
                                         />
                                     </div>
@@ -1069,7 +1068,7 @@ export default function Home() {
                                             placeholder="jane@clinic.example.com"
                                             value={formData.email}
                                             onChange={handleInputChange}
-                                            className="w-full bg-slate-900/50 border-white/10 text-white placeholder-slate-400 focus:ring-emerald-500 focus:border-emerald-500 h-13 rounded-xl"
+                                            className="w-full p-4 bg-slate-900/50 border-white/10 text-white placeholder-slate-400 focus:ring-emerald-500 focus:border-emerald-500 h-13 rounded-xl"
                                             required
                                         />
                                     </div>
@@ -1085,7 +1084,7 @@ export default function Home() {
                                             placeholder="+1 (555) 000-0000"
                                             value={formData.phone}
                                             onChange={handleInputChange}
-                                            className="w-full bg-slate-900/50 border-white/10 text-white placeholder-slate-400 focus:ring-emerald-500 focus:border-emerald-500 h-13 rounded-xl"
+                                            className="w-full p-4 bg-slate-900/50 border-white/10 text-white placeholder-slate-400 focus:ring-emerald-500 focus:border-emerald-500 h-13 rounded-xl"
                                             required
                                         />
                                     </div>
@@ -1101,7 +1100,7 @@ export default function Home() {
                                             placeholder="General Practice, Pharmacy, etc."
                                             value={formData.specialty}
                                             onChange={handleInputChange}
-                                            className="w-full bg-slate-900/50 border-white/10 text-white placeholder-slate-400 focus:ring-emerald-500 focus:border-emerald-500 h-13 rounded-xl"
+                                            className="w-full p-4 bg-slate-900/50 border-white/10 text-white placeholder-slate-400 focus:ring-emerald-500 focus:border-emerald-500 h-13 rounded-xl"
                                             required
                                         />
                                     </div>
@@ -1126,7 +1125,7 @@ export default function Home() {
                         {/* Brand */}
                         <div>
                             <Link to="/" className="flex items-center gap-2 mb-4">
-                                <img src="/BRAND-LOGO.svg" alt="Pillmate Logo" className="h-8 w-auto" />
+                                <img src="/BRANDLOGO.svg" alt="Pillmate Logo" className="h-8 w-auto" />
                                 <span className="text-xl font-semibold text-white">Pillmate</span>
                             </Link>
                             <p className="text-sm text-slate-400">
